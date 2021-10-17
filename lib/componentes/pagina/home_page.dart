@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Menu de temas'),
       ),
+      backgroundColor: Colors.greenAccent,
       body: _Lista(),
     );
   }
@@ -18,42 +19,36 @@ class HomePage extends StatelessWidget {
       future: menuProvider.cargarData(),
       initialData: [],
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-        
         return ListView(
           children: _ListaItems(snapshot.data, context),
         );
-
       },
     );
-
-  
   }
 
-  List<Widget> _ListaItems(List<dynamic>data, BuildContext context) {
-    
-    final List<Widget> opciones=[];
+  List<Widget> _ListaItems(List<dynamic> data, BuildContext context) {
+    final List<Widget> opciones = [];
 
-    data.forEach((opt) { 
+    /*if (data == null) {
+      return [];
+    }*/
 
+    data.forEach((opt) {
       final widgetTem = ListTile(
-        title: Text(opt['texto']),
-        leading: getIcon(opt['icon']),
-        trailing: Icon(Icons.keyboard_arrow_right, color:Colors.blue,),
-        onTap: (){
-          /*final route = MaterialPageRoute(
-            builder:(context)=>//poner la pagina( )
-          );*/
+          title: Text(opt['texto']),
+          leading: getIcon(opt['icon']),
+          trailing: Icon(
+            Icons.keyboard_arrow_right,
+            color: Colors.blue,
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, opt['ruta']);
+          });
 
-          //Navigator.push(context, route);
-
-        }
-      );
-      
-      opciones..add(widgetTem)
-              ..add(Divider());
-
+      opciones
+        ..add(widgetTem)
+        ..add(Divider());
     });
     return opciones;
-
   }
 }

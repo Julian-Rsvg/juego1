@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:juego1/componentes/inicio.dart';
-import 'package:juego1/componentes/pagina/home_page.dart';
+import 'package:juego1/proceso.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class FondoInicio extends StatefulWidget {
@@ -383,7 +382,7 @@ _loginPage(BuildContext context) {
                     borderRadius: BorderRadius.circular(20.0)),
                 onPressed: (){
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InicioPagina(),));
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage(),));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProcesoPage(),));
                 },
                 color: Colors.lightBlue,
                 child: Text(

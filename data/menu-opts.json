@@ -2,19 +2,29 @@
     "nombreApp" : "Inicio",
     "rutas" : [
         {
-            "ruta" : "alert",
+            "ruta" : "suma",
             "icon" : "add_alert",
-            "texto": "Alertas"
+            "texto": "Suma"
         },
         {
-            "ruta" : "avatar",
+            "ruta" : "resta",
             "icon" : "accessibility",
-            "texto": "Avatars"
+            "texto": "Resta"
         },
         {
-            "ruta" : "card",
+            "ruta" : "multiplicación",
             "icon" : "sort_rounded",
-            "texto": "Cards - Tarjetas"
+            "texto": "Multiplicacion"
+        },
+        {
+            "ruta" : "divición",
+            "icon" : "sort_rounded",
+            "texto": "Divicion"
+        },
+        {
+            "ruta" : "area",
+            "icon" : "sort_rounded",
+            "texto": "Calcular area de figuras geometricas"
         }
     ]
 }
