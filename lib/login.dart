@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:juego1/componentes/providers/db_provider.dart';
 import 'package:juego1/proceso.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class FondoInicio extends StatefulWidget {
   @override
   _FondoInicioState createState() => _FondoInicioState();
-
 }
 
 class _FondoInicioState extends State<FondoInicio> {
@@ -14,72 +14,92 @@ class _FondoInicioState extends State<FondoInicio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title : Text('MathThink'),
-        centerTitle : true,
-      ),
+        appBar: AppBar(
+          title: Text('MathThink'),
+          centerTitle: true,
+        ),
         body: Stack(
-      children: <Widget>[
-        Opacity(
-          opacity: 0.8,
-          child: Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: CustomPaint(
-              painter: FondoPaint1(),
-            ),
-          ),
-        ),
-        Opacity(
-          opacity: 0.4,
-          child: Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: CustomPaint(
-              painter: FondoPaint2(),
-            ),
-          ),
-        ),
-        Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                LiteRollingSwitch(
-                  //initial value
-                  value: mystate,
-                  textOn: 'Registrar',
-                  textOff: 'Ingresar',
-                  colorOn: Color(0xff00ccd1),
-                  colorOff: Color(0xff00019b),
-                  iconOn: Icons.assignment,
-                  iconOff: Icons.person,
-                  textSize: 15.0,
-                  onChanged: (bool state) {
-                    //Use it to manage the different states
-                    print('Current State of SWITCH IS: $state');
-                  },
-                  onTap: () {
-                    setState(() {
-                      mystate = !mystate;
-                    });
-                  },
+          children: <Widget>[
+            Opacity(
+              opacity: 0.8,
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: CustomPaint(
+                  painter: FondoPaint1(),
                 ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                mystate ? _registroPage(context) : _loginPage(context),
-              ],
+              ),
             ),
-          ),
-        ),
-      ],
-    ));
+            Opacity(
+              opacity: 0.4,
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: CustomPaint(
+                  painter: FondoPaint2(),
+                ),
+              ),
+            ),
+            Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    LiteRollingSwitch(
+                      //initial value
+                      value: mystate,
+                      textOn: 'Registrar',
+                      textOff: 'Ingresar',
+                      colorOn: Color(0xff00ccd1),
+                      colorOff: Color(0xff00019b),
+                      iconOn: Icons.assignment,
+                      iconOff: Icons.person,
+                      textSize: 15.0,
+                      onChanged: (bool state) {
+                        //Use it to manage the different states
+                        print('Current State of SWITCH IS: $state');
+                      },
+                      onTap: () {
+                        setState(() {
+                          mystate = !mystate;
+                        });
+                      },
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    mystate ? _registroPage(context) : _loginPage(context),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
 
+String _nombre;
+String _apellidos;
+int _edad;
+String _alias;
+
 _registroPage(BuildContext context) {
+  final myController = TextEditingController();
+  final myController1 = TextEditingController();
+  final myController2 = TextEditingController();
+  final myController3 = TextEditingController();
+
+  /* @override
+  void dispose() {
+    // Limpia el controlador cuando el Widget se descarte
+    myController.dispose();
+     myController1.dispose();
+      myController2.dispose();
+       myController3.dispose();
+    return dispose();
+  }*/
+
   final size = MediaQuery.of(context).size;
   return Opacity(
     opacity: 0.89,
@@ -114,6 +134,8 @@ _registroPage(BuildContext context) {
             margin: EdgeInsets.only(top: 15.0),
             padding: const EdgeInsets.all(5.0),
             child: TextField(
+              controller: myController,
+              onSubmitted: (valorN) => _nombre = valorN,
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -134,6 +156,8 @@ _registroPage(BuildContext context) {
           Container(
             padding: const EdgeInsets.all(5.0),
             child: TextField(
+              controller: myController1,
+              onSubmitted: (valorA) => _apellidos = valorA,
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -154,6 +178,8 @@ _registroPage(BuildContext context) {
           Container(
             padding: const EdgeInsets.all(5.0),
             child: TextField(
+              controller: myController2,
+              onSubmitted: (edad) => _edad.toString(),
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -174,6 +200,8 @@ _registroPage(BuildContext context) {
           Container(
             padding: const EdgeInsets.all(5.0),
             child: TextField(
+              controller: myController3,
+              onSubmitted: (valorAli) => _alias = valorAli,
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -191,74 +219,6 @@ _registroPage(BuildContext context) {
               ),
             ),
           ),
-          /*Container(
-            padding: const EdgeInsets.all(5.0),
-            child: TextField(
-              style: TextStyle(color: Colors.black),
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                ),
-                labelText: 'Correo',
-                hintStyle: TextStyle(color: Colors.black),
-                hintText: 'example@gmail.com',
-                labelStyle: TextStyle(color: Colors.blue),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.mail_outline,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            child: TextField(
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                ),
-                labelText: 'Contraseña',
-                hintText: '*********',
-                hintStyle: TextStyle(color: Colors.black),
-                labelStyle: TextStyle(color: Colors.blue),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.vpn_key,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 15.0),
-            padding: const EdgeInsets.all(5.0),
-            child: TextField(
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                ),
-                labelText: 'Confirmar Contraseña',
-                hintText: '*********',
-                hintStyle: TextStyle(color: Colors.black),
-                labelStyle: TextStyle(color: Colors.blue),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                prefixIcon: Icon(
-                  Icons.vpn_key,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),*/
           Container(
             padding: const EdgeInsets.all(5.0),
             child: RaisedButton(
@@ -268,7 +228,7 @@ _registroPage(BuildContext context) {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  'VERIFICAR',
+                  'ENVIAR',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,
@@ -276,7 +236,18 @@ _registroPage(BuildContext context) {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                return showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text(myController.text),
+                    );
+                  },
+                );
+
+                //DBProvider.db.nuevoScan();
+              },
             ),
           ),
         ],
@@ -293,7 +264,7 @@ _loginPage(BuildContext context) {
       height: 500.0,
       width: size.width * 0.85,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.purple.shade50,
         borderRadius: BorderRadius.circular(5.0),
         boxShadow: <BoxShadow>[
           BoxShadow(
@@ -312,7 +283,7 @@ _loginPage(BuildContext context) {
               child: Icon(
                 Icons.verified_user,
                 size: 65.0,
-                color: Colors.blueGrey,
+                color: Colors.greenAccent.shade400,
               ),
             ),
             Container(
@@ -380,9 +351,11 @@ _loginPage(BuildContext context) {
                 elevation: 7.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),
-                onPressed: (){
+                onPressed: () {
                   //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InicioPagina(),));
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProcesoPage(),));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ProcesoPage(),
+                  ));
                 },
                 color: Colors.lightBlue,
                 child: Text(
@@ -403,7 +376,7 @@ _loginPage(BuildContext context) {
               alignment: Alignment.center,
               child: FlatButton(
                 padding: EdgeInsets.only(right: 0.0),
-                splashColor: Colors.white,
+                splashColor: Colors.purple.shade400,
                 onPressed: () {},
                 child: Text(
                   '¿Olvidaste tu Alias?',
@@ -421,8 +394,6 @@ _loginPage(BuildContext context) {
   );
 }
 
-
-
 class FondoPaint1 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -437,7 +408,7 @@ class FondoPaint1 extends CustomPainter {
   void curva1(Canvas canvas, Size size) {
     final paint = Paint();
 
-    paint.color = Color(0xfffd1400);
+    paint.color = Color(0xFF00E676);
     paint.style = PaintingStyle
         .fill; // .stroke es para dibujar una linea y  .fill es para pintar todo
     paint.strokeWidth = 10.0;
@@ -484,7 +455,7 @@ class FondoPaint2 extends CustomPainter {
   void curva1(Canvas canvas, Size size) {
     final paint = Paint();
 
-    paint.color = Color(0xffffd1400);
+    paint.color = Color(0xFF00E676);
     paint.style = PaintingStyle
         .fill; // .stroke es para dibujar una linea y  .fill es para pintar todo
     paint.strokeWidth = 10.0;

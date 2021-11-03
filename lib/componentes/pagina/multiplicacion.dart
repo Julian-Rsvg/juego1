@@ -5,7 +5,7 @@ class Multiplicacion extends StatelessWidget{
   @override 
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.purple.shade900,
       appBar: AppBar(
         title: Text('Multiplicacion'),
       ),
@@ -56,6 +56,7 @@ class Multiplicacion extends StatelessWidget{
 
 Widget _cardTipo1() {
   return Card(
+    color: Colors.blueAccent,
     elevation: 10.0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20.0)
@@ -122,7 +123,6 @@ Widget _cardTipo2(){
     ),
   );
 }
-
 
 
 }

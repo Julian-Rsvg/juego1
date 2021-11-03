@@ -14,12 +14,12 @@
         {
             "ruta" : "multiplicación",
             "icon" : "sort_rounded",
-            "texto": "Multiplicacion"
+            "texto": "Multiplicación"
         },
         {
-            "ruta" : "divición",
+            "ruta" : "división",
             "icon" : "sort_rounded",
-            "texto": "Divicion"
+            "texto": "División"
         },
         {
             "ruta" : "area",
